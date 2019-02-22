@@ -30,7 +30,7 @@ public class DefaultBeanFactoryTest {
         helloWorldService.helloWorld();
     }
 
-    public void step2getBean(){
+    public void step2getBean() throws Exception{
         BeanFactory beanFactory = new AutowireCapableBeanFactory();
 
         // 2.注入bean
@@ -65,7 +65,7 @@ public class DefaultBeanFactoryTest {
         helloWorldService.helloWorld();
     }
 
-    public void step4getBean(){
+    /*public void step4getBean() throws Exception{
         // 1.读取配置
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
         xmlBeanDefinitionReader.loadBeanDefinitions("tinyioc.xml");
@@ -80,5 +80,23 @@ public class DefaultBeanFactoryTest {
         HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
         helloWorldService.helloWorld();
 
+    }*/
+
+    public void step5getBean() throws Exception{
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
+        xmlBeanDefinitionReader.loadBeanDefinitions("tinyioc.xml");
+
+        // 2.初始化BeanFactory并注册bean
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
+        for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
+            beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
+        }
+
+        // 3.初始化bean
+        beanFactory.preInstantiateSingletons();
+
+        // 4.获取bean
+        HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
+        helloWorldService.helloWorld();
     }
 }
