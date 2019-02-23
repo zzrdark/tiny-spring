@@ -1,5 +1,6 @@
 package us.codecraft.zzr;
 
+import org.junit.Test;
 import us.codecraft.tinyioc.HelloWorldService;
 import us.codecraft.tinyioc.beans.BeanDefinition;
 import us.codecraft.tinyioc.beans.PropertyValue;
@@ -9,6 +10,7 @@ import us.codecraft.tinyioc.beans.factory.AutowireCapableBeanFactory;
 import us.codecraft.tinyioc.beans.factory.BeanFactory;
 import us.codecraft.tinyioc.beans.io.ResourceLoader;
 import us.codecraft.tinyioc.beans.xml.XmlBeanDefinitionReader;
+import us.codecraft.tinyioc.context.ApplicationContext;
 import us.codecraft.tinyioc.context.ClassPathXmlApplicationContext;
 
 import java.util.Map;
@@ -44,7 +46,7 @@ public class DefaultBeanFactoryTest {
         helloWorldService.helloWorld();
     }
 
-    public void step3getbean(){
+    public void step3getbean() throws Exception {
         // 1.初始化beanfactory
         BeanFactory beanFactory = new AutowireCapableBeanFactory();
 
@@ -97,6 +99,12 @@ public class DefaultBeanFactoryTest {
 
         // 4.获取bean
         HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
+        helloWorldService.helloWorld();
+    }
+    @Test
+    public void step6getBean() throws Exception {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("tinyioc.xml");
+        HelloWorldService helloWorldService = (HelloWorldService) applicationContext.getBean("helloWorldService");
         helloWorldService.helloWorld();
     }
 }

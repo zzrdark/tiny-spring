@@ -20,6 +20,7 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 	}
 
 	public ClassPathXmlApplicationContext(String configLocation, AbstractBeanFactory beanFactory) throws Exception {
+		//把自动装配beanFactory放到AbstractApplicationContext
 		super(beanFactory);
 		this.configLocation = configLocation;
 		refresh();
@@ -28,7 +29,9 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 	@Override
 	protected void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception {
 		XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
+		//解析xml文件
 		xmlBeanDefinitionReader.loadBeanDefinitions(configLocation);
+		//把解析出来的 放到 abstractbeanFactory 一个 beanDefinitionMap 一个  beanDefinitionNames 里
 		for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
 			beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
 		}

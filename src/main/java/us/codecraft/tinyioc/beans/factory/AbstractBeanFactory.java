@@ -81,6 +81,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	public List getBeansForType(Class type) throws Exception {
 		List beans = new ArrayList<Object>();
 		for (String beanDefinitionName : beanDefinitionNames) {
+			//看是否他的子类 BeanPostProcessor  如果是 则拿出来
 			if (type.isAssignableFrom(beanDefinitionMap.get(beanDefinitionName).getBeanClass())) {
 				beans.add(getBean(beanDefinitionName));
 			}

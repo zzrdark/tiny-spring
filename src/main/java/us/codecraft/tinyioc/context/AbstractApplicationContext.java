@@ -17,6 +17,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
 
 	public void refresh() throws Exception {
 		loadBeanDefinitions(beanFactory);
+		//拿到
 		registerBeanPostProcessors(beanFactory);
 		onRefresh();
 	}
