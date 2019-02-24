@@ -4,6 +4,7 @@ import org.aopalliance.aop.Advice;
 
 /**
  * @author yihua.huang@dianping.com
+ * 解析表达式配置器
  */
 public class AspectJExpressionPointcutAdvisor implements PointcutAdvisor {
 

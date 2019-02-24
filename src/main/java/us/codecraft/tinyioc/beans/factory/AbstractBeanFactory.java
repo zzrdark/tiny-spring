@@ -70,6 +70,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 		return bean;
 	}
 
+	//由子类实现的一个方法  主要使用来自动装备的方法
 	protected void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
 
 	}

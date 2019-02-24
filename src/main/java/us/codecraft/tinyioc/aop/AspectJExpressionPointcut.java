@@ -13,7 +13,7 @@ import java.util.Set;
  * @author yihua.huang@dianping.com
  */
 public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodMatcher {
-
+	//切点解析
 	private PointcutParser pointcutParser;
 
 	private String expression;
@@ -49,7 +49,7 @@ public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodM
 			pointcutExpression = buildPointcutExpression();
 		}
 	}
-
+	//解析
 	private PointcutExpression buildPointcutExpression() {
 		return pointcutParser.parsePointcutExpression(expression);
 	}
